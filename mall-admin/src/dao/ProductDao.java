@@ -136,7 +136,7 @@ public class ProductDao {
          Class.forName(driver);
          Connection conn = DriverManager.getConnection(dbaddr, dbid, dbpw);
          //SQL
-         String sql = "select product_id, category_id, product_name, product_price, product_soldout from product where category_id = ? order by product_id desc limit ?, ?";
+         String sql = "select product_id, category_id, product_name, product_price, product_soldout from product where category_id = ? order by product_id asc limit ?, ?";
          PreparedStatement stmt = conn.prepareStatement(sql);
          stmt.setInt(1, categoryId);
          stmt.setInt(2, (currentPage-1)*10);

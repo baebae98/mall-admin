@@ -29,6 +29,7 @@
 	//회원 목록 dao에서 출력
 	ArrayList<Member> memberList = memberDao.selectMemberList();
 %>
+<!-- 메뉴바 -->
 <div class="container"> <!-- 컨테이너~얘도 부트스트랩에서 가져옴 -->	
 	<div>
 		<jsp:include page="/inc/menu.jsp"></jsp:include>

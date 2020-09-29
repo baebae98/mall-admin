@@ -13,9 +13,6 @@
 </head>
 <body>
 	<div class="container">
-	<div>
-		<jsp:include page="/inc/menu.jsp"></jsp:include>
-	</div>
 	<%
 		// 인코딩 셋팅
 		request.setCharacterEncoding("utf-8");
@@ -37,7 +34,10 @@
 			list = ordersDao.selectOrdersListByState(ordersState);
 		}
 	%>
-	
+	<!-- 메뉴바 -->
+	<div>
+      <jsp:include page="/inc/menu.jsp"></jsp:include>
+  	</div> 
 		<h1>주문 목록</h1>
 	<form method="post" action="/mall-admin/orders/ordersList.jsp">
 		<select name="ordersState">
@@ -61,7 +61,7 @@
 				}
 			%>
 		</select>
-		<button class="btn btn-secondary" type="submit">주문상태별로 보기</button>
+		<button class="btn btn-danger" type="submit">주문상태별로 보기</button>
 	</form>
 	<table class="table table-dark table-striped table-hover">
 		<thead>

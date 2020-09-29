@@ -58,15 +58,33 @@
 			<tr>
 				<td>주문상태 변경</td>
 				<td>
-					<select name="ordersState">
-						<%
-							for(String state : list) {
-						%>		
-								<option value="<%=ordersState%>"><%=ordersState%></option>
-						<%
-							}							
-						%>
-					</select>
+					<select class="form-control" name="ordersState">
+							<%
+								if (ordersState.equals("결제완료")) {
+									%><option value="결제완료" selected="selected">결제완료</option><%
+								} else {
+									%><option value="결제완료">결제완료</option><%
+								}
+							
+								if (ordersState.equals("배송준비중")) {
+									%><option value="배송준비중" selected="selected">배송준비중</option><%
+								} else {
+									%><option value="배송준비중">배송준비중</option><%
+								}
+								
+								if (ordersState.equals("배송완료")) {
+									%><option value="배송완료" selected="selected">배송완료</option><%
+								} else {
+									%><option value="배송완료">배송완료</option><%
+								}
+								
+								if (ordersState.equals("주문취소")) {
+									%><option value="주문취소" selected="selected">주문취소</option><%
+								} else {
+									%><option value="주문취소">주문취소</option><%
+								}
+							%>
+							</select>
 				</td>
 			</tr>
 		</table>
