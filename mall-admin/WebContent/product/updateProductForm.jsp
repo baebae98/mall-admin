@@ -10,6 +10,22 @@
 </head>
 <!-- w3school.com 사이트에서 가져온 부트스트랩 코드 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- 스크립트 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#btn").click(function(){ // 폼 유효성 검사 (form validation checking)
+		if($("#productName").val().length<1){
+			alert("이름을 입력해 주세요.");
+			return;
+		}else if($("#productPrice").val().length<1){
+			alert("가격을 입력해 주세요.");
+			return;
+		}
+		$("#updateForm").submit();
+		});
+	});
+</script>
 <body>
 <%
 	//글자 인코딩
@@ -29,7 +45,7 @@
 %>
  <div class="container"> <!-- 컨테이너~얘도 부트스트랩에서 가져옴 -->	
 <h1>수정하기</h1>
-<form method="post" action="/mall-admin/product/updateProductAction.jsp">
+<form method="post" action="/mall-admin/product/updateProductAction.jsp" id="updateForm">
 <table class="table table-dark table-striped table-hover">
 	<tr>
 		<td>product_id</td><!-- readonly 처리를 하여 읽기만 가능하게 함. 수정불가 -->
@@ -37,19 +53,19 @@
 	</tr>
 	<tr>
 		<td>product_name</td>
-		<td><input type="text" name="productName" value="<%=product.getProductName()%>"></td>
+		<td><input type="text" name="productName" value="<%=product.getProductName()%>" id="productName"></td>
 	</tr>
 	<tr>
 		<td>product_price</td>
-		<td><input type="text" name="productPrice" value="<%=product.getProductPrice()%>"></td>
+		<td><input type="text" name="productPrice" value="<%=product.getProductPrice()%>" id="productPrice"></td>
 	</tr>
 	<tr>
 		<td>product_content</td>
-		<td><input type="text" name="productContent" value="<%=product.getProductContent()%>"></td>
+		<td><input type="text" name="productContent" value="<%=product.getProductContent()%>" id="productContent"></td>
 	</tr>
 </table>
 <div>
-	<button type="submit" class="btn btn-danger">수정</button>
+	<button type="button" id="btn" class="btn btn-danger">수정</button>
 	<a href="/mall-admin/product/productList.jsp">돌아가기</a>
 </div>
 </form>

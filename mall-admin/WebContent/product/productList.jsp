@@ -85,6 +85,7 @@
 				<th>product_id</th>
 				<th>category_id</th>
 				<th>product_name</th>
+				<th>product_content</th>
 				<th>product_price</th>
 				<th>product_soldout</th>
 				<th>수정</th>

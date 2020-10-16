@@ -13,6 +13,8 @@
 <head>
 <meta charset="UTF-8">
 <title>modifyOrdersState수정폼</title>
+<!-- 스크립트-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -88,7 +90,7 @@
 				</td>
 			</tr>
 		</table>
-		<button class="btn btn-secondary" type="submit">수정하기</button>
+		<button class="btn btn-secondary" type="button" id="btn">수정하기</button>
 </form>
 </div>
 </body>

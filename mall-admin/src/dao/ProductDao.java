@@ -101,7 +101,7 @@ public class ProductDao {
          Class.forName(driver);
          Connection conn = DriverManager.getConnection(dbaddr, dbid, dbpw);
          //SQL
-         String sql = "select product_id, category_id, product_name, product_price, product_soldout from product order by product_id desc limit ?, ?";
+         String sql = "select product_id, category_id, product_name, product_content,product_price, product_soldout from product order by product_id desc limit ?, ?";
          PreparedStatement stmt = conn.prepareStatement(sql);
          stmt.setInt(1, (currentPage-1)*10);
          stmt.setInt(2, 10);
@@ -116,6 +116,7 @@ public class ProductDao {
            p.setProductId(rs.getInt("product_id"));
          p.setCategoryId(rs.getInt("category_id"));
          p.setProductName(rs.getString("product_name"));
+         p.setProductContent(rs.getString("product_content"));
          p.setProductPrice(rs.getInt("product_price"));      
          p.setProductSoldout(rs.getString("product_soldout"));
             list.add(p);
@@ -125,7 +126,7 @@ public class ProductDao {
          return list;   
       }
    
-   public ArrayList<Product> selectProductListByCategoryId(int categoryId, int currentPage) throws Exception {
+   	public ArrayList<Product> selectProductListByCategoryId(int categoryId, int currentPage) throws Exception {
          ArrayList<Product> list = new ArrayList<Product>();
          
          //DB주소,포트,아이디,비번
