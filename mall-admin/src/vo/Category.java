@@ -1,26 +1,31 @@
 package vo;
 
-/*
- * class Category
- * 
- */
 public class Category {
-	//캡슐화 private
-	private int categoryId;  //카테고리번호
-	private String categoryName;  //카테고리이름
+	private int categoryId;
+	private String categoryName;
+	private String categoryPic;
 	
 	public int getCategoryId() {
 		return categoryId;
 	}
+	
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
+	
 	public String getCategoryName() {
 		return categoryName;
 	}
+	
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	
-	
+
+	public String getCategoryPic() {
+		return categoryPic;
+	}
+
+	public void setCategoryPic(String categoryPic) {
+		this.categoryPic = categoryPic;
+	}
 }

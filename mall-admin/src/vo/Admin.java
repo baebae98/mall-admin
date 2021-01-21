@@ -1,26 +1,22 @@
 package vo;
 
-/*
- * class Admin
- * 
- */
 public class Admin {
-	//Ä¸½¶È­
-	private String adminId; //¾îµå¹Î ¾ÆÀÌµğ
-	private String adminPw; //¾îµå¹Î ºñ¹ø
+	private String adminId;	// ê´€ë¦¬ì ì•„ì´ë””
+	private String adminPw;	// ê´€ë¦¬ì íŒ¨ìŠ¤ì›Œë“œ
 	
 	public String getAdminId() {
 		return adminId;
 	}
+	
 	public void setAdminId(String adminId) {
 		this.adminId = adminId;
 	}
+	
 	public String getAdminPw() {
 		return adminPw;
 	}
+	
 	public void setAdminPw(String adminPw) {
 		this.adminPw = adminPw;
 	}
-	
-	
 }

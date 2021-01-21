@@ -1,20 +1,13 @@
 package vo;
 
-/*
- * class Product
- * 
- */
 public class Product {
-	//private Ä¸½¶È­
-	private int productId; // »óÇ°¹øÈ£
-	private int categoryId; // Ä«Å×°í¸®¹øÈ£
-	private String productName; // »óÇ°ÀÌ¸§
-	private int productPrice; //  »óÇ°°¡°İ
-	private String productContent; // »óÇ°³»¿ë
-	private String productSoldout; // »óÇ°ÆÇ¸ÅÇöÈ²
-	private String productPic; //»óÇ°»çÁø
-	
-	//Ä¸½¶È­
+	private int productId;			// ìƒí’ˆ ê³ ìœ ë²ˆí˜¸
+	private int categoryId;			// ìƒí’ˆì´ ì†í•œ ì¹´í…Œê³ ë¦¬ ê³ ìœ ë²ˆí˜¸
+	private String productName;		// ìƒí’ˆ ì´ë¦„
+	private int productPrice;		// ìƒí’ˆ ê°€ê²©
+	private String productContent;	// ìƒí’ˆ ì„¤ëª…
+	private String productSoldout;	// ìƒí’ˆ í’ˆì ˆì—¬ë¶€ (Yì´ë©´ í’ˆì ˆ, Nì´ë©´ íŒë§¤ì¤‘)
+	private String productPic;		// ìƒí’ˆ ì´ë¯¸ì§€ (default.jsp)
 	public int getProductId() {
 		return productId;
 	}
@@ -57,7 +50,4 @@ public class Product {
 	public void setProductPic(String productPic) {
 		this.productPic = productPic;
 	}
-	
-	
-	
 }

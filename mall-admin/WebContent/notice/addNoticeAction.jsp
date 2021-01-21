@@ -1,25 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
 <%@ page import="vo.*" %>
 <%@ page import="dao.*" %>
+
 <%
-	//공지사항 추가 액션페이지
+	if (session.getAttribute("loginAdminId") == null) {	// 로그인 세션 체크
+		response.sendRedirect(request.getContextPath() + "/login.jsp");
+		return;
+	}
+%>
+
+<%
+	//요청 인코딩 설정
+	request.setCharacterEncoding("UTF-8");
+
+	// addNoticeForm으로부터 파라미터를 받아온다.
+	String noticeTitle = request.getParameter("noticeTitle");
+	String noticeContent = request.getParameter("noticeContent");
 	
-	//UTF-8로 통일
-	request.setCharacterEncoding("utf-8");
-	//int noticeId = Integer.parseInt(request.getParameter("noticeId"));
-	String noticeTitle= request.getParameter("noticeTitle");
-	String noticeContent=request.getParameter("noticeContent");
-	//String noticeDate = request.getParameter("noticeDate");
+	//System.out.println(noticeTitle);		// 공지 타이틀 디버깅
+	//System.out.println(noticeContent);		// 공지 내용 디버깅
 	
-	Notice notice = new Notice();
-	//notice.setNoticeId(noticeId);
+	Notice notice = new Notice();	// Notice 데이터 타입을 생성
 	notice.setNoticeTitle(noticeTitle);
 	notice.setNoticeContent(noticeContent);
-	//notice.setNoticeDate(noticeDate);
 	
 	NoticeDao noticeDao = new NoticeDao();
-	noticeDao.insertNotice(notice);
+	noticeDao.insertNotice(notice); // Notice 타입의 noticeTitle, NoticeContent를 insertNotice 메소드를 통해 처리한다.
 	
-	//정상작동되면 다시 리스트로
-	response.sendRedirect("/mall-admin/notice/noticeList.jsp");
+	response.sendRedirect(request.getContextPath() + "/notice/noticeList.jsp"); // 페이지 이동
 %>

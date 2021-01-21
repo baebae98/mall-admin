@@ -1,97 +1,106 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
+<%@ page import="java.sql.*" %>
 <%@ page import="vo.*" %>
 <%@ page import="dao.*" %>
-<%@ page import="java.util.*" %>
+
 <%
-	if(session.getAttribute("loginAdminId") == null) {
-		response.sendRedirect("/mall-admin/login.jsp");
+	if (session.getAttribute("loginAdminId") == null) {	// 로그인 세션 체크
+		response.sendRedirect(request.getContextPath() + "/login.jsp");
 		return;
 	}
 %>
+
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>modifyOrdersState수정폼</title>
-<!-- 스크립트-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<body>
-<div class="container">
-	<div>
-		<jsp:include page="/inc/menu.jsp"></jsp:include>
-	</div>
-	<%
-	// 인코딩 설정
-	request.setCharacterEncoding("utf-8");
-	// 주문상태 수정을 위한 ordersId 값 받기
-	int ordersId = 0;
-	if(request.getParameter("ordersId") != null) {
-		ordersId = Integer.parseInt(request.getParameter("ordersId"));
-	}
-	// 현재 등록된 주문 상태를 받기 위한 변수
-	String ordersState = null;
-	if(request.getParameter("ordersState") != null) {
-		ordersState = request.getParameter("ordersState");
-	}
-	// 주문상태 목록 쿼리를 받기 위한 Dao,ArrayList 객체 생성
-	OrdersDao ordersDao = new OrdersDao();
-	ArrayList<String> list = null;
-	// 주문상태 목록 쿼리 결과를 리스트에 담음
-	list = ordersDao.selectOrdersStateList();
-	%>
-	<div class="jumbotron">
-		<h1>주문 상태 수정</h1>
-	</div>
-	<form method="post" action="/mall-admin/orders/modifyOrdersStateAction.jsp">
-		<table class="table table-dark table-striped table-hover">
-			<tr>
-				<td>주문번호</td>
-				<td>
-					<input class="form-control"  type="text" name="ordersId" value="<%=ordersId%>" readonly="readonly">
-				</td>
-			</tr>
-			<tr>
-				<td>현재 주문상태</td>
-				<td>
-					<input class="form-control"  type="text" value="<%=ordersState%>" readonly="readonly">
-				</td>
-			</tr>
-			<tr>
-				<td>주문상태 변경</td>
-				<td>
-					<select class="form-control" name="ordersState">
+	<head>
+		<meta charset="UTF-8">
+		<title>modifyOrdersState.jsp</title>
+		
+		<!-- Bootstrap Framework 사용 -->
+		
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- Popper JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<%
+			// 요청 인코딩 설정
+			request.setCharacterEncoding("UTF-8");
+		
+			int thisOrdersId = Integer.parseInt(request.getParameter("ordersId"));
+			String thisOrdersState = request.getParameter("ordersState");
+		
+			OrdersDao ordersDao = new OrdersDao();
+			ArrayList<Orders> ordersStateList = ordersDao.selectOrdersStateListAll(); // 주문상태 리스트 출력
+		%>
+		<div class="container">
+			
+			<div>
+				<!-- menu 항목을 include한다 -->
+				<jsp:include page="/inc/menu.jsp"></jsp:include>
+			</div>
+			
+			<div class="jumbotron">
+				<h1>주문 수정</h1>
+				<p>상품 주문상태를 수정하는 페이지입니다.</p>
+			</div>
+			
+			<form method="post" action="<%=request.getContextPath() %>/orders/modifyOrdersStateAction.jsp">
+				<table class="table table-hover" style="text-align: center;">
+					<tr>
+						<td>주문 번호</td>
+						<td>
+							<input type="text" class="form-control" name="ordersId" value="<%=thisOrdersId %>" readonly="readonly">
+						</td>
+					</tr>
+					<tr>
+						<td>주문 상태</td>
+						<td>
+							<select class="form-control" name="ordersState">
 							<%
-								if (ordersState.equals("결제완료")) {
+								if (thisOrdersState.equals("결제완료")) {
 									%><option value="결제완료" selected="selected">결제완료</option><%
 								} else {
 									%><option value="결제완료">결제완료</option><%
 								}
 							
-								if (ordersState.equals("배송준비중")) {
+								if (thisOrdersState.equals("배송준비중")) {
 									%><option value="배송준비중" selected="selected">배송준비중</option><%
 								} else {
 									%><option value="배송준비중">배송준비중</option><%
 								}
 								
-								if (ordersState.equals("배송완료")) {
+								if (thisOrdersState.equals("배송완료")) {
 									%><option value="배송완료" selected="selected">배송완료</option><%
 								} else {
 									%><option value="배송완료">배송완료</option><%
 								}
 								
-								if (ordersState.equals("주문취소")) {
+								if (thisOrdersState.equals("주문취소")) {
 									%><option value="주문취소" selected="selected">주문취소</option><%
 								} else {
 									%><option value="주문취소">주문취소</option><%
 								}
 							%>
 							</select>
-				</td>
-			</tr>
-		</table>
-		<button class="btn btn-secondary" type="submit" id="btn">수정하기</button>
-</form>
-</div>
-</body>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<button type="submit" class="btn btn-info">수정</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</body>
 </html>

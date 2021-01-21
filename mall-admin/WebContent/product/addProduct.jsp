@@ -1,95 +1,128 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="vo.*" %>
-<%@ page import="dao.*"%>
-<%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="vo.*" %>
+<%@ page import="dao.*" %>
+
+<%
+	if (session.getAttribute("loginAdminId") == null) {	// 로그인 세션 체크
+		response.sendRedirect(request.getContextPath() + "/login.jsp");
+		return;
+	}
+%>
+
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<!-- 스크립트 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<Script>
-		$(document).ready(function(){
-			$("#btn").click(function(){ // 폼 유효성 검사 (form validation checking)
-			if($("#productName").val().length<1){
-				alert("이름을 입력해 주세요.");
-				return;
-			}else if($("#productPrice").val().length<1){
-				alert("가격을 입력해 주세요.");
-				return;
-				}else if($("#productContent").val().length<1){
-					alert("설명을 입력해 주세요.");
-					return;
+	<head>
+		<meta charset="UTF-8">
+		<title>addProduct.jsp</title>
+		
+		<!-- Bootstrap Framework 사용 -->
+		
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- Popper JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		
+		<!-- jQuery를 이용하여 Form 유효성 검사 -->
+		<script>
+			$(document).ready(function() {	// 문서가 로드되면 이 스크립트를 제일 마지막에 실행해주세요
+				$("#btn").click(function() {	// 버튼 클릭시 폼 내용의 유효성 검사를 수행
+					if ($("#categoryId").val() == "") {	// categoryId 미선택시 수행
+						alert("카테고리를 선택해주세요");
+						return;
+					} else if ($("#productName").val() == "") {	// productName 공백인 경우 수행
+						alert("상품명을 입력해주세요");
+						return;
+					} else if ($("#productPrice").val() == "") {	// productPrice 공백인 경우 수행
+						alert("상품 가격을 입력해주세요");
+						return;
+					} else if ($("#productContent").val() == "") {	// productContent 공백인 경우 수행
+						alert("상품 설명을 입력해주세요");
+						return;
 					}
-			$("#addForm").submit();
+					$("#addForm").submit();
+				});	
 			});
-		});
-</Script>
-</head>
-<body>
-	<%
-		CategoryDao categoryDao = new CategoryDao();
-		ArrayList<Category> categoryList = categoryDao.selectCategoryList();
-	%>
-	<div>
-		<jsp:include page="/inc/menu.jsp"></jsp:include>
-	</div>
-	<div class="jumbotron">
+		</script>
+	</head>
+	<body>
+		<%
+			CategoryDao categoryDao = new CategoryDao();
+			ArrayList<Category> categoryList = categoryDao.selectCategoryListAll();
+		%>
+	
 		<div class="container">
-			<h1>상품 추가</h1>
+			<div>
+				<!-- menu 항목을 include한다 -->
+				<jsp:include page="/inc/menu.jsp"></jsp:include>
+			</div>
+			
+			<div class="jumbotron">
+				<h1>상품 추가</h1>
+				<p>상품을 추가하는 페이지입니다. 상품 이름을 입력해주세요.</p>
+			</div>
+			
+			<br>
+			
+			<div>
+				<form method="post" action="<%=request.getContextPath() %>/product/addProductAction.jsp" id="addForm">
+					<table class="table table-striped" style="text-align: center">
+						<tr>
+							<td>카테고리</td>
+							<td>
+								<select name="categoryId" class="form-control" id="categoryId">
+									<option value="">==== 카테고리 선택 ====</option>
+									<%
+										for (Category c : categoryList) {
+											%><option value="<%=c.getCategoryId() %>"><%=c.getCategoryName() %></option><%
+										}
+									%>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>상품명</td>
+							<td><input type="text" class="form-control" name="productName" id="productName"></td>
+						</tr>
+						<tr>
+							<td>상품 가격</td>
+							<td><input type="text" class="form-control" name="productPrice" id="productPrice"></td>
+						</tr>
+						<tr>
+							<td>상품 설명</td>
+							<td>
+								<textarea class="form-control" rows="10" cols="40" name="productContent" id="productContent"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td>품절/판매 여부</td>
+							<td>
+								<div class="form-check">
+									<label class="form-check-label">
+										<input type="radio" class="form-check-input" name="productSoldout" value="N" checked="checked">판매중&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="radio" class="form-check-input" name="productSoldout" value="Y">품절
+									</label>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<button type="button" class="btn btn-dark" id="btn">상품 추가</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			
+			<br><br>
 		</div>
-	</div>>
-	<div class="container">
-	<form method="post" action ="/mall-admin/product/addProductAction.jsp" id="addForm">
-	<table class="table table-dark table-striped table-hover">
-		<tr>
-			<td>category_id</td>
-			<td>
-				<select class="form-control" name="categoryId">
-				<%
-					for(Category c : categoryList){
-				%>
-					<option value="<%=c.getCategoryId()%>"><%=c.getCategoryName() %></option>
-				<%
-					}
-				%>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>product_name</td>
-			<td>
-				<input class="form-control" type="text" name="productName" id="productName">
-			</td>
-		</tr>
-		<tr>
-			<td>product_price</td>
-			<td>
-				<input class="form-control" type="text" name="productPrice" id="productPrice">
-			</td>
-		</tr>
-		<tr>
-			<td>product_content</td>
-			<td>
-				<textarea class="form-control" rows="5" name="productContent" id="productContent"></textarea>
-			</td>
-		</tr>
-		<tr>
-			<td>product_soldout</td>
-			<td>
-				<input type="radio" name="productSoldout" value="N" checked="checked">품절 아님
-				<input type="radio" name="productSoldout" value="Y">품절
-			</td>
-		</tr>
-		<tr>
-			<td><button type="button" class="btn btn-danger" id="btn">입력</button>
-			</td>
-		</tr>
-	</table>
-	</form>
-	</div>
-</body>
+	</body>
 </html>

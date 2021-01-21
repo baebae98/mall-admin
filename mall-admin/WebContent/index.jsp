@@ -1,36 +1,48 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.*" %>
+
 <%
-	//로그인이 아이디가 = null이면  로그인페이지로 이동
-if (session.getAttribute("loginAdminId") == null) {
-	response.sendRedirect("/mall-admin/login.jsp");
-	return;//위 코드 실행하고 끝내주는 코드, 안쓰게 되면 밑에 코드  실행됨.
-}
+	if (session.getAttribute("loginAdminId") == null) {	// 로그인 세션 체크
+		response.sendRedirect(request.getContextPath() + "/login.jsp");
+		return;
+	}
 %>
+
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>Index</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<!--w3school.com 사이트에서 가져옴  -->
-</head>
-<body>
-	<div>
-		<jsp:include page="/inc/menu.jsp"></jsp:include>
-	</div>
-	<div class="jumbotron text-center">
-		<div align="center">
-			<h1>관리자 메인 페이지</h1>
-			<h4>쇼핑몰 어드민</h4>
-		</div>
-	</div>
-	<div class="container">
-		<br/>
-		<div class="container text-center">
-			<img src="./image/2.jpg"> <img src="./image/1.jpg">
-		</div>
+	<head>
+		<meta charset="UTF-8">
+		<title>index.jsp</title>
+		
+		<!-- Bootstrap Framework 사용 -->
+		
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- Popper JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+	
+		<div class="container">
+			<div>
+				<!-- menu 항목을 include한다 -->
+				<jsp:include page="/inc/menu.jsp"></jsp:include>
+			</div>
+			
+			<div class="jumbotron">
+				<h1>HOME</h1>
+				<h4>쇼핑몰 관리자 페이지</h4>
+			</div>
+			<br>
+				<br/>
 		<br/>
 		<table class="table table-hover tb-width center">
 	            <tr>
@@ -50,10 +62,25 @@ if (session.getAttribute("loginAdminId") == null) {
 	                <td>
 	                	이 프로젝트는 모델1과 메서드 활용에 익숙해지기 위해 제작된 프로젝트이며, 
 	                	쇼핑몰 어드민 프로젝트입니다.
-						개발환경으로는 자바이클립스IDE와 HeidiSQL(mariaDB)를 이용하였습니다.
 					</td>
 	            </tr>
+	            <tr>
+	            	<th>개발환경</th>
+	            	<td>
+	            		<ul>
+							<li>Operating System: Microsoft Windows 10 x64 Pro</li>
+							<li>웹서버: Apache Tomcat 8.5.57</li>
+							<li>DB: MariaDB 10.5.5</li>
+							<li>Java: 1.8.0_261</li>
+						</ul>
+						<ul>
+							<li>IDE: Eclipse IDE for Enterprise Java Developers (2020-06)</li>
+							<li>사용된 언어: English, Korean(UTF-8), HTML, JSP, Javascript</li>
+						</ul>
+	            	</td>
+	            </tr>
 			</table>
-	</div>
-</body>
+			
+		</div>
+	</body>
 </html>
