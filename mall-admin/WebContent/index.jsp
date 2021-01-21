@@ -25,14 +25,35 @@ if (session.getAttribute("loginAdminId") == null) {
 			<h1>관리자 메인 페이지</h1>
 			<h4>쇼핑몰 어드민</h4>
 		</div>
-		<br />이 프로그램은 모델1과 메서드 활용에 익숙해지기 위해 제작된 프로그램이며 <br /> <strong>개발환경</strong>으로는
-		자바이클립스IDE와 HeidiSQL(mariaDB)를 이용하였습니다. <br /> <strong><br />
-			(전체 페이징은 시간남으면 구현)</strong> <strong>-상품관리:수정,-클리어</strong> <br /> <strong>-주문관리:수정,-클리어</strong>
-		<br /> <strong>-공지관리:삭제,수정,상세보기 추가-클리어 (수정페이지 :시간 수정해야함.)</strong> <br />
-		<strong>-회원관리:삭제 - 클리어</strong> <br />
+	</div>
+	<div class="container">
+		<br/>
 		<div class="container text-center">
 			<img src="./image/2.jpg"> <img src="./image/1.jpg">
 		</div>
+		<br/>
+		<table class="table table-hover tb-width center">
+	            <tr>
+	                <th width="20%">제작자</th>
+	                <td width="80%">배형준</td>
+	            </tr>
+	            <tr>
+	            	<th>이메일</th>
+	            	<td>piskk74@naver.com</td>
+	            </tr>
+	            <tr>
+	                <th>프로젝트 기간</th>
+	                <td>2020.09.29 ~ 2020.10.16 / 2020.01.21 ~ ?</td>
+	            </tr>
+	            <tr>
+	                <th>프로젝트 설명</th>
+	                <td>
+	                	이 프로젝트는 모델1과 메서드 활용에 익숙해지기 위해 제작된 프로젝트이며, 
+	                	쇼핑몰 어드민 프로젝트입니다.
+						개발환경으로는 자바이클립스IDE와 HeidiSQL(mariaDB)를 이용하였습니다.
+					</td>
+	            </tr>
+			</table>
 	</div>
 </body>
 </html>
