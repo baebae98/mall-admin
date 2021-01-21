@@ -48,13 +48,13 @@
 			<tr>
 				<td>주문번호</td>
 				<td>
-					<input type="text" name="ordersId" value="<%=ordersId%>" readonly="readonly">
+					<input class="form-control"  type="text" name="ordersId" value="<%=ordersId%>" readonly="readonly">
 				</td>
 			</tr>
 			<tr>
 				<td>현재 주문상태</td>
 				<td>
-					<input type="text" value="<%=ordersState%>" readonly="readonly">
+					<input class="form-control"  type="text" value="<%=ordersState%>" readonly="readonly">
 				</td>
 			</tr>
 			<tr>
@@ -90,7 +90,7 @@
 				</td>
 			</tr>
 		</table>
-		<button class="btn btn-secondary" type="button" id="btn">수정하기</button>
+		<button class="btn btn-secondary" type="submit" id="btn">수정하기</button>
 </form>
 </div>
 </body>

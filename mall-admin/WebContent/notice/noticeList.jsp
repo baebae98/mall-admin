@@ -23,11 +23,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-	<div class="container"> <!-- 컨테이너~얘도 부트스트랩에서 가져옴 -->	
-	<div>
-		<!-- menu.jsp에서 메뉴바를 가져온다. -->
-		<jsp:include page="/inc/menu.jsp"></jsp:include>
-	</div>
 	<%
 		//페이지 전체의 인코딩 통일 request에도 UTF-8사용
 		request.setCharacterEncoding("utf-8");
@@ -43,10 +38,17 @@
 		//리스트출력 변수,호출
 		ArrayList<Notice> noticeList = noticeDao.selectNoticeList();
 	%>
-	<h1>게시판 목록</h1>
 	<div>
-		<!--  <a href="/mall-admin/notice/noticeList.jsp">[목록으로]</a>--><!-- 나중에 만들거임 -->
+		<jsp:include page="/inc/menu.jsp"></jsp:include>
 	</div>
+
+	<div class="jumbotron">
+		<div class="container">
+			<h1>공지사항 목록</h1>
+		</div>
+	</div>
+	<div class="container">
+	<a href="/mall-admin/notice/addNotice.jsp">공지사항추가</a>
 	<!--table  스타일: class=...... -->
 	<table class="table table-dark table-striped table-hover">
 	<thead>
@@ -76,7 +78,6 @@
 		%>
 	</tbody>
 	</table>
-	<a href="/mall-admin/notice/addNotice.jsp">공지사항추가</a>
 	</div>
 </body>
 </html>

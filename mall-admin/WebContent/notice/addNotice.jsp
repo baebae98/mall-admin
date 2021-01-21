@@ -27,20 +27,26 @@
 	})
 </script>
 </head>
-	<div class="container">
 	<div>
 		<jsp:include page="/inc/menu.jsp"></jsp:include>
 	</div>
+
+	<div class="jumbotron">
+		<div class="container">
+			<h1>공지사항 추가</h1>
+		</div>
+	</div>
+	<div class="container">
 	<form method="post" action="/mall-admin/notice/addNoticeAction.jsp" id="addForm">
 			<table class="table table-dark table-striped table-hover">
 				
 				<tr>
 					<td>notice_title</td>
-					<td><input type="text" name="noticeTitle" id="noticeTitle"></td>
+					<td><input class="form-control" type="text" name="noticeTitle" id="noticeTitle"></td>
 				</tr>
 				<tr>
 					<td>notice_content</td>
-					<td><input type="text" name="noticeContent" id="noticeContent"></td>
+					<td><textarea class="form-control" rows="5"  name="noticeContent" id="noticeContent"></textarea></td>
 				</tr>
 				<tr>
 					<td><button type="button" id="btn" class="btn btn-danger">입력</button></td>

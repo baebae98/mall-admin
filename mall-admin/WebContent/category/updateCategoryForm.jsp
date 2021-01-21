@@ -31,8 +31,15 @@
 
 	
 %>
- <div class="container"> <!-- 컨테이너~얘도 부트스트랩에서 가져옴 -->	
-<h1>수정하기</h1>
+	<div>
+		<jsp:include page="/inc/menu.jsp"></jsp:include>
+	</div>
+	<div class="jumbotron">
+		<div class="container">
+			<h1>카테고리 수정</h1>
+		</div>
+	</div>
+<div class="container">
 <form method="post" action="/mall-admin/category/updateCategoryAction.jsp" id="updateForm">
 <table class="table table-dark table-striped table-hover">
 	<tr>
@@ -45,8 +52,8 @@
 	</tr>
 </table>
 <div>
-	<button type="button" id="btn">수정</button>
-	<a href="/mall-admin/category/categoryList.jsp">돌아가기</a>
+	<button  class="btn btn-danger" type="button" id="btn">수정</button>
+	<a class="btn btn-primary" href="/mall-admin/category/categoryList.jsp">돌아가기</a>
 </div>
 </form>
 </div>

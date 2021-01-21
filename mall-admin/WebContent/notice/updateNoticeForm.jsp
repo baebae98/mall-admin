@@ -43,25 +43,32 @@
 	NoticeDao noticeDao = new NoticeDao();
 	Notice notice = noticeDao.selectNoticeOne(noticeId);
 %>
- <div class="container"> <!-- 컨테이너~얘도 부트스트랩에서 가져옴 -->	
- 	<h1>공지사항 수정</h1>
+ 	<div>
+		<jsp:include page="/inc/menu.jsp"></jsp:include>
+	</div>
+	<div class="jumbotron">
+		<div class="container">
+			<h1>공지사항 수정</h1>
+		</div>
+	</div>
+	<div class="container">
  	<form method="post" action="/mall-admin/notice/updateNoticeAction.jsp" id="updateForm">
  	<table class="table table-dark table-striped table-hover">
  		<tr>
  			<td>notice_id</td>
- 			<td><input type="text" name="noticeId" value="<%=notice.getNoticeId() %>" readonly ="readonly"></td>
+ 			<td><input class="form-control" type="text" name="noticeId" value="<%=notice.getNoticeId() %>" readonly ="readonly"></td>
  		</tr>
  		<tr>
  			<td>notice_title</td>
- 			<td><input type="text" name="noticeTitle" value="<%=notice.getNoticeTitle() %>" id="noticeTitle"></td>
+ 			<td><input class="form-control" type="text" name="noticeTitle" value="<%=notice.getNoticeTitle() %>" id="noticeTitle"></td>
  		</tr>
  		<tr>
  			<td>notice_content</td>
- 			<td><input type="text" name="noticeContent" value="<%=notice.getNoticeContent() %>" id="noticeContent"></td>
+ 			<td><textarea class="form-control" rows="5" name="noticeContent" id="noticeContent"><%=notice.getNoticeContent()%></textarea></td>
  		</tr>
  		<tr>
  			<td>notice_date</td>
- 			<td><input type="text" name="noticeDate" value="<%=notice.getNoticeDate()%>" readonly="readonly"></td>
+ 			<td><input class="form-control" type="text" name="noticeDate" value="<%=notice.getNoticeDate()%>" readonly="readonly"></td>
  		</tr>
  	</table>
  	<div>
